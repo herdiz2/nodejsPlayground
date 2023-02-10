@@ -51,20 +51,29 @@ for (var i in arr) {
       !(arr[i][j] === null)
     ) {
       // console.log(arr[i][j]);
+      newObj = { ...newObj, [j]: arr[i][j] };
     } else {
+      var newInsideArr = [];
       if (hasJsonStructure(arr[i][j])) {
         var newInnerObj = {};
         var parsedInnerArrObj = JSON.parse(arr[i][j]);
         // console.log(parsedInnerArrObj);
         for (var k in parsedInnerArrObj) {
+          var newInnerObj = {};
           for (var l in parsedInnerArrObj[k]) {
             if (l === 'label') {
-              console.log(l);
+              // console.log(parsedInnerArrObj[k][l]);
+              newInnerObj = { ...newInnerObj, [l]: parsedInnerArrObj[k][l] };
+            } else {
+              newInnerObj = { ...newInnerObj, [l]: parsedInnerArrObj[k][l] };
             }
           }
+          newInsideArr.push(newInnerObj);
         }
+        newObj = { ...newObj, [j]: JSON.stringify(newInsideArr) };
       }
     }
   }
   // newArr.push(newObj);
 }
+console.log(newObj);
