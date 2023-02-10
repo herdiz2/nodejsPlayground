@@ -50,11 +50,20 @@ for (var i in arr) {
       !hasJsonStructure(arr[i][j]) &&
       !(arr[i][j] === null)
     ) {
-      // const [translation] = await translate.translate(arr[i][j], target);
-      console.log(arr[i][j]);
-      // newObj = { ...newObj, [j]: translation };
+      // console.log(arr[i][j]);
     } else {
-      // newObj = { ...newObj, [j]: arr[i][j] };
+      if (hasJsonStructure(arr[i][j])) {
+        var newInnerObj = {};
+        var parsedInnerArrObj = JSON.parse(arr[i][j]);
+        // console.log(parsedInnerArrObj);
+        for (var k in parsedInnerArrObj) {
+          for (var l in parsedInnerArrObj[k]) {
+            if (l === 'label') {
+              console.log(l);
+            }
+          }
+        }
+      }
     }
   }
   // newArr.push(newObj);
